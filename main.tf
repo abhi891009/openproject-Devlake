@@ -110,7 +110,7 @@ resource "aws_lb_target_group" "openproject_tg" {
 
 resource "aws_lb_target_group" "devlake_tg" {
   name     = "devlake-tg"
-  port     = 80
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
 }
