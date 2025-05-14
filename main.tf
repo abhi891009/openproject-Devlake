@@ -139,7 +139,7 @@ resource "aws_lb_listener" "listener_devlake" {
 
 # EC2 Instance - OpenProject
 resource "aws_instance" "openproject" {
-  ami           = "ami-0df368112825f8d8f"
+  ami           = "ami-084568db4383264d4"
   instance_type = var.instance_type
   subnet_id     = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
@@ -160,7 +160,7 @@ resource "aws_instance" "openproject" {
 
 # EC2 Instance - DevLake
 resource "aws_instance" "devlake" {
-  ami           = "ami-0df368112825f8d8f"
+  ami           = "ami-084568db4383264d4"
   instance_type = var.instance_type
   subnet_id     = aws_subnet.public_2.id
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
@@ -171,8 +171,8 @@ resource "aws_instance" "devlake" {
               apt-get update -y
               apt-get install -y docker.io
               systemctl start docker
-              git clone https://github.com/lavanya24072000/usecases.git
-              cd usecases
+              git clone https://github.com/abhi891009/openproject-Devlake
+              cd openproject-Devlake
               curl -SL https://github.com/docker/compose/releases/download/v2.33.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
               chmod +x /usr/local/bin/docker-compose
               docker-compose up -d
