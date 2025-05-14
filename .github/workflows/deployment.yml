@@ -73,6 +73,6 @@ jobs:
       - name: Terraform Apply (Create EC2)
         run: terraform apply -auto-approve
         
-      - name: Terraform destroy (Create EC2)
-        run: terraform destroy -auto-approve
+      #- name: Terraform destroy (Create EC2)
+      #  run: terraform destroy -auto-approve
         
