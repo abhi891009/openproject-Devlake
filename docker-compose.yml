@@ -1,0 +1,48 @@
+version: '3.9'
+ 
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lake
+      MYSQL_USER: merico
+      MYSQL_PASSWORD: merico
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+ 
+  lake:
+    image: mericodev/devlake:latest
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+ 
+  config-ui:
+    image: mericodev/devlake-config-ui:latest
+    depends_on:
+      - lake
+    ports:
+      - "4000:4000"
+ 
+  grafana:
+    image: mericodev/devlake-dashboard:latest
+    ports:
+      - "3002:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      GF_SERVER_ROOT_URL: "http://0.0.0.0:4000/grafana"
+      GF_USERS_DEFAULT_THEME: "light"
+      MYSQL_URL: mysql:3306
+      MYSQL_DATABASE: lake
+      MYSQL_USER: merico
+      MYSQL_PASSWORD: merico
+    depends_on:
+      - mysql
+ 
+volumes:
+  mysql-data:
+  grafana-storage:
