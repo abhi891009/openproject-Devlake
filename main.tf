@@ -110,7 +110,7 @@ resource "aws_lb_target_group" "openproject_tg" {
 
 resource "aws_lb_target_group" "devlake_tg" {
   name     = "devlake-tg"
-  port     = 4000
+  port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
 }
@@ -193,5 +193,5 @@ resource "aws_lb_target_group_attachment" "openproject_attachment" {
 resource "aws_lb_target_group_attachment" "devlake_attachment" {
   target_group_arn = aws_lb_target_group.devlake_tg.arn
   target_id        = aws_instance.devlake.id
-  port             = 4000
+  port             = 80
 }
